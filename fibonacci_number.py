@@ -6,15 +6,21 @@
 # Given n, calculate F(n).
 
 class Solution:
-    def fib(self, n: int) -> int:
+    def fib2(self, n: int) -> int:
         prev, curr= 0,1
         for _ in range(n):
             prev, curr = curr, prev+curr
 
         return prev
 
+    def fib(self, n:int)->int :
+        if n < 2:
+            return n
+        return self.fib(n - 1) + self.fib(n - 2)
+
+
 s=Solution()
 print(s.fib(2))
-print(s.fib(3))
+print(s.fib(8))
 print(s.fib(4))
-print(s.fib(64))
+# print(s.fib(64))
