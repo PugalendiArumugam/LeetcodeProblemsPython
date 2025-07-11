@@ -1,5 +1,5 @@
 # 89 Gray Code
-#
+# ---------------
 # Example 1:
 # Input: n = 2
 # Output: [0,1,3,2]
@@ -18,7 +18,6 @@
 # Example 2:
 # Input: n = 1
 # Output: [0,1]
-#
 from typing import List
 class Solution:
     def grayCode(self, n: int) -> List[int]:
@@ -48,6 +47,6 @@ class Solution:
 
 
 s=Solution()
-print(s.grayCode(2))
-print(s.grayCode2(1))
-print(s.grayCode3(4))
+print(s.grayCode3(2))   # 0,1,3,2
+print(s.grayCode2(1))   # 0, 1
+print(s.grayCode3(8))    #128
