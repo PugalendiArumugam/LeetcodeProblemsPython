@@ -28,10 +28,18 @@ class Solution:
                 r=mid
         return nums[l]
 
+
+    # this is funniest answer.  It works too. :)
+    def findMin2(self, nums: List[int]) -> int:
+        return min(nums)
+
 s=Solution()
 print(s.findMin([3,4,5,1,2]))
 print(s.findMin([4,5,6,7,0,1,2]))
 print(s.findMin([11,13,15,17]))
 
+print(s.findMin2([3,4,5,1,2]))
+print(s.findMin2([4,5,6,7,0,1,2]))
+print(s.findMin2([11,13,15,17]))
 
 
