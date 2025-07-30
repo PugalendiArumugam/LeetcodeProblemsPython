@@ -15,16 +15,14 @@ from heapq import heapify, heappush, heappop
 from typing import List
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        max_heap = [-stone for stone in stones]      # invert the values
-        heapify(max_heap)
-
-        while len(max_heap) > 1:
-            stone1 = -heappop(max_heap)
-            stone2 = -heappop(max_heap)
+        h = [-s for s in stones]      # invert the values
+        heapify(h)
+        while len(h) > 1:
+            stone1 = -heappop(h)
+            stone2 = -heappop(h)
             if stone1 != stone2:
-                heappush(max_heap, -(stone1 - stone2))
-
-        return 0 if not max_heap else -max_heap[0]
+                heappush(h, -(stone1 - stone2))
+        return 0 if not h else -h[0]
 
 s=Solution()
 print(s.lastStoneWeight([2,7,4,1,8,1]))
