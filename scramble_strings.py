@@ -36,7 +36,30 @@ class Solution:
             return False
 
         return recurse(0, 0, len(s1))
-    
+
+    #another popular LRU cache with DFS algorith.
+    def isScramble3(self, s1: str, s2: str) -> bool:
+        @lru_cache(None)
+        def dfs(a, b):
+            # Base cases
+            if a == b:
+                return True
+            if sorted(a) != sorted(b):
+                return False
+
+            n = len(a)
+            for i in range(1, n):
+                # Case 1: No swap
+                if dfs(a[:i], b[:i]) and dfs(a[i:], b[i:]):
+                    return True
+                # Case 2: Swap
+                if dfs(a[:i], b[-i:]) and dfs(a[i:], b[:-i]):
+                    return True
+            return False
+
+        return dfs(s1, s2)
+
+
     #best solution
     map = {}
     def isScramble2(self, s1: str, s2: str) -> bool:
@@ -61,6 +84,6 @@ class Solution:
         return False
 
 s=Solution()
-print(s.isScramble("great","rgeat"))
+print(s.isScramble3("great","rgeat"))
 print(s.isScramble("abcde", "caebd"))
 print(s.isScramble('a','a'))
