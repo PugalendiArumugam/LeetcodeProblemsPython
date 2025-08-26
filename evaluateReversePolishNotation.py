@@ -29,7 +29,8 @@
 # = (0 + 17) + 5
 # = 17 + 5
 # = 22
-from typing import List
+from collections import deque
+from typing import List, Deque
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         result=[]
@@ -49,7 +50,29 @@ class Solution:
 
         return result[0]
 
+    #optimised code
+    def evalRPN2(self, tokens: List[str]) -> int:
+        if len(tokens) == 1:
+            return int(tokens[0])
+        stack = deque([])
+        for i in tokens:
+            if i not in {'+','-','*','/'}:
+                stack.append(int(i))
+            else:
+                a = stack.pop()
+                b = stack.pop()
+                if i == '+':
+                    ans = b+a
+                if i == '-':
+                    ans = b-a
+                if i == '*':
+                    ans = b*a
+                if i == '/':
+                    ans = int(b/a)
+                stack.append(ans)
+        return stack.pop()
+
 s=Solution()
-print(s.evalRPN(["2","1","+","3","*"]))
-print(s.evalRPN(["4","13","5","/","+"]))
+# print(s.evalRPN2(["2","1","+","3","*"]))
+# print(s.evalRPN2(["4","13","5","/","+"]))
 print(s.evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
