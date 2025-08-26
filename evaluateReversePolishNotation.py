@@ -72,7 +72,45 @@ class Solution:
                 stack.append(ans)
         return stack.pop()
 
+    def evalRPN3(self, tokens: List[str]) -> int:
+        result = []
+        # define operator functions first
+        def add(stack):
+            stack[-2] += stack[-1]
+            stack.pop()
+
+        def sub(stack):
+            stack[-2] -= stack[-1]
+            stack.pop()
+
+        def mul(stack):
+            stack[-2] *= stack[-1]
+            stack.pop()
+
+        def div(stack):
+            # integer division toward zero
+            stack[-2] = int(float(stack[-2]) / stack[-1])
+            stack.pop()
+
+        # now create dispatch dictionary
+        ops = {
+            "+": add,
+            "-": sub,
+            "*": mul,
+            "/": div
+        }
+
+        # evaluator loop
+        for token in tokens:
+            if token.lstrip("-").isdigit():  # handles negative numbers too
+                result.append(int(token))
+            else:
+                ops[token](result)
+
+        return result[0]  # final result
+
+
 s=Solution()
 # print(s.evalRPN2(["2","1","+","3","*"]))
 # print(s.evalRPN2(["4","13","5","/","+"]))
-print(s.evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
+print(s.evalRPN3(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]))
